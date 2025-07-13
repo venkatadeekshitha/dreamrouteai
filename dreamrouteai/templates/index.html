@@ -1,0 +1,259 @@
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DreamRoute – Choose Your Domain</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef1f5;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .domain-btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .domain-btn:hover {
+            background-color: #004a99;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 Welcome to DreamRoute</h1>
+    <p>Select a domain to get your personalized roadmap:</p>
+
+
+    <a href="{% url 'show_roadmap' 'ai' %}" class="domain-btn">AI</a>
+    <a href="{% url 'show_roadmap' 'web development' %}" class="domain-btn">Web Development</a>
+    <a href="{% url 'show_roadmap' 'cybersecurity' %}" class="domain-btn">Cybersecurity</a>
+    <a href="{% url 'show_roadmap' 'data science' %}" class="domain-btn">Data Science</a>
+    <a href="{% url 'show_roadmap' 'system design' %}" class="domain-btn">System Design</a>
+    <a href="{% url 'show_roadmap' 'deep learning' %}" class="domain-btn">Deep Learning</a>
+    <a href="{% url 'show_roadmap' 'iot' %}" class="domain-btn">IoT</a>
+    <a href="{% url 'show_roadmap' 'blockchain' %}" class="domain-btn">Blockchain</a>
+    <a href="{% url 'show_roadmap' 'full stack development' %}" class="domain-btn">Full Stack Development</a>
+    <a href="{% url 'show_roadmap' 'backend development' %}" class="domain-btn">Backend Development</a>
+    <a href="{% url 'show_roadmap' 'devops' %}" class="domain-btn">DevOps</a>
+    <a href="{% url 'show_roadmap' 'cloud computing' %}" class="domain-btn">Cloud Computing</a>
+    <a href="{% url 'show_roadmap' 'ui ux design' %}" class="domain-btn">UI/UX Designing</a>
+    <a href="{% url 'show_roadmap' 'ethical hacking' %}" class="domain-btn">Ethical Hacking</a>
+    <a href="{% url 'show_roadmap' 'network security' %}" class="domain-btn">Network Security</a>
+
+    <hr style="margin: 40px 0;">
+
+    <p>👇 Explore Jobs & Internships</p>
+
+    
+    <a href="{% url 'redirect_to_jobs' 'ai' %}" target="_blank" class="domain-btn">AI Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'web development' %}" target="_blank" class="domain-btn">Web Dev Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'cybersecurity' %}" target="_blank" class="domain-btn">Cybersecurity Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'data science' %}" target="_blank" class="domain-btn">Data Science Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'system design' %}" target="_blank" class="domain-btn">System Design Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'deep learning' %}" target="_blank" class="domain-btn">Deep Learning Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'iot' %}" target="_blank" class="domain-btn">IoT Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'blockchain' %}" target="_blank" class="domain-btn">Blockchain Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'full stack development' %}" target="_blank" class="domain-btn">Full Stack Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'backend development' %}" target="_blank" class="domain-btn">Backend Dev Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'devops' %}" target="_blank" class="domain-btn">DevOps Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'cloud computing' %}" target="_blank" class="domain-btn">Cloud Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'ui ux design' %}" target="_blank" class="domain-btn">UI/UX Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'ethical hacking' %}" target="_blank" class="domain-btn">Ethical Hacking Jobs</a>
+    <a href="{% url 'redirect_to_jobs' 'network security' %}" target="_blank" class="domain-btn">Network Security Jobs</a>
+</body>
+</html> -->
+
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8" />
+  <title>DreamRoute AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Quicksand&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to right, #f0f4ff, #e5ffe7);
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar-brand {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(to right, #00c9ff, #92fe9d);
+      color: white;
+      border-bottom-left-radius: 50px;
+      border-bottom-right-radius: 50px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-family: 'Orbitron', sans-serif;
+      animation: slideIn 1s ease-out;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-top: 10px;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .domain-card {
+      background-color: white;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .domain-card:hover {
+      transform: translateY(-8px);
+      background: #e6f7ff;
+    }
+
+    .domain-icon {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .feature-card {
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease-in-out;
+      padding: 25px;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px;
+      background-color: #f0f0f0;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="/">DreamRoute AI</a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'summarizer' %}">AI Summarizer</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'support_desk' %}">AI Support Desk</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 data-aos="fade-up">DreamRoute AI</h1>
+    <p data-aos="fade-up" data-aos-delay="200">Your Personalized Learning Journey Starts Here</p>
+  </section>
+
+  <!-- Domain Cards -->
+  <section class="domain-grid" data-aos="fade-up">
+    {% for domain in domains %}
+      <a class="domain-card" href="{% url 'show_roadmap' domain|urlencode %}">
+        <img src="{% static 'icons/'|add:domain|add:'.png' %}" alt="{{ domain }} icon" class="domain-icon" />
+        <h4>{{ domain|title }}</h4>
+      </a>
+      
+    {% endfor %}
+  </section>
+
+  <!-- Features Section -->
+  <section class="container mt-5" data-aos="fade-up">
+    <div class="row text-center">
+      <div class="col-md-4 mb-4">
+        <div class="feature-card h-100 bg-white">
+          <h4>🎯 Gamified Roadmap</h4>
+          <p>Complete levels, earn XP, and track your journey.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="feature-card h-100 bg-white">
+          <h4>💼 Internship Opportunities</h4>
+          <p>Find jobs and internships based on your domain.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="feature-card h-100 bg-white">
+          <h4>📈 Progress Tracking</h4>
+          <p>Visualize your learning journey and performance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Made with ❤️ by DreamRoute AI Team</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+</html>

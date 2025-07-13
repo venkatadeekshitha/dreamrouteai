@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard – DreamRoute AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #f0f4ff;
+      padding: 50px 20px;
+    }
+
+    .dashboard-container {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .btn-custom {
+      background: #007bff;
+      color: white;
+      border: none;
+    }
+
+    .btn-custom:hover {
+      background: #0056b3;
+    }
+
+    .progress {
+      height: 25px;
+      background-color: #e9ecef;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <body>
+  <div class="container dashboard-container">
+    <h2 class="text-center mb-4">Welcome, {{ user.username }} 👋</h2>
+    <p class="text-center text-muted mb-5">Explore your personalized learning journey and track your progress.</p>
+
+    <!-- Navigation Cards -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="card p-4 text-center">
+          <h5>📘 Roadmap</h5>
+          <p>Continue your learning journey</p>
+          <a href="{% url 'home' %}" class="btn btn-custom">View Roadmaps</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4 text-center">
+          <h5>💼 Opportunities</h5>
+          <p>Find internships and jobs</p>
+          <a href="{% url 'home' %}#opportunities" class="btn btn-custom">Explore Jobs</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4 text-center">
+          <h5>🚪 Logout</h5>
+          <p>End your current session</p>
+          <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Learning Domains & Progress -->
+    <h4 class="mt-4">🧭 Your Learning Domains</h4>
+    {% if dashboard_data %}
+      <div class="row row-cols-1 row-cols-md-2 g-4 mt-2">
+        {% for item in dashboard_data %}
+          <div class="col">
+            <div class="card h-100 p-3 shadow-sm">
+              <h5 class="card-title">{{ item.domain|title }}</h5>
+              <p class="card-text text-muted">{{ item.roadmap|truncatewords:30 }}</p>
+
+              <div class="progress mb-2" style="height: 20px;">
+                <div class="progress-bar bg-success"
+                     role="progressbar"
+                     style="width: {{ item.progress_percent }}%;"
+                     aria-valuenow="{{ item.completed_steps }}"
+                     aria-valuemin="0"
+                     aria-valuemax="{{ item.total_steps }}">
+                  {{ item.progress_percent }}%
+                </div>
+              </div>
+
+              <p class="mb-0 text-muted">
+                {{ item.completed_steps }} of {{ item.total_steps }} steps completed
+              </p>
+
+              <a href="{% url 'show_roadmap' item.domain %}" class="btn btn-sm btn-primary mt-2">Resume {{ item.domain|title }}</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-muted">You haven’t selected any learning domains yet. Start from the homepage.</p>
+    {% endif %}
+  </div>
+</body>
+</html>
+
+  <!--
+  <div class="container dashboard-container">
+    <h2 class="text-center mb-4">Welcome, {{ user.username }} 👋</h2>
+    <p class="text-center text-muted mb-5">Explore your personalized learning journey and track your progress.</p>
+
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="card p-4 text-center">
+          <h5>📘 Roadmap</h5>
+          <p>Continue your learning journey</p>
+          <a href="{% url 'home' %}" class="btn btn-custom">View Roadmaps</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4 text-center">
+          <h5>💼 Opportunities</h5>
+          <p>Find internships and jobs</p>
+          <a href="{% url 'home' %}#opportunities" class="btn btn-custom">Explore Jobs</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4 text-center">
+          <h5>🚪 Logout</h5>
+          <p>End your current session</p>
+          <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        </div>
+      </div>
+    </div>
+
+     Selected Domain -
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">📚 Your Selected Domain</h5>
+        {% if profile.selected_domain %}
+          <p class="card-text">{{ profile.selected_domain|title }}</p>
+        {% else %}
+          <p class="card-text text-muted">You haven’t selected a domain yet.</p>
+        {% endif %}
+      </div>
+    </div>
+
+     Progress Tracking -
+     {% if total_steps > 0 %}
+<div class="progress" style="height: 25px;">
+  <div class="progress-bar bg-success"
+       role="progressbar"
+       style="width: {{ progress_percent }}%;"
+       aria-valuenow="{{ completed_steps }}"
+       aria-valuemin="0"
+       aria-valuemax="{{ total_steps }}">
+    {{ progress_percent }}%
+  </div>
+</div>
+{% if next_step %}
+  <div class="card mt-4">
+    <div class="card-body">
+      <h5 class="card-title">🎯 Continue Where You Left Off</h5>
+      <p class="card-text">Next: {{ next_step.step_title }}</p>
+      <a href="{% url 'show_roadmap' profile.selected_domain %}" class="btn btn-primary">
+        Resume Learning
+      </a>
+    </div>
+  </div>
+{% else %}
+  <p class="mt-3 text-success">✅ You’ve completed all the steps in your roadmap!</p>
+{% endif %}
+
+<p class="mt-2">{{ completed_steps }} out of {{ total_steps }} steps completed</p>
+{% endif %}
+-->
+    

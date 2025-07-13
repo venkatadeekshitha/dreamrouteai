@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Summarize Topic | DreamRoute AI</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f1f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #2e86de;
+            padding: 15px 30px;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .nav {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #2e86de;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #34495e;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+        }
+
+        textarea, input[type="file"] {
+            width: 100%;
+            margin-top: 8px;
+            padding: 12px;
+            font-size: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #2e86de;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+        }
+
+        button:hover {
+            background-color: #1b4f72;
+        }
+
+        .summary-box {
+            margin-top: 30px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-left: 6px solid #2e86de;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2e86de;
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    DreamRoute AI – Summarize Any Topic
+</header>
+
+<div class="nav">
+    <a href="/">🏠 Home</a>
+    <a href="/dashboard/">📊 Dashboard</a>
+    <a href="/summarize/">🧠 Summarize</a>
+    <a href="/logout/">🚪 Logout</a>
+</div>
+
+<div class="container">
+    <h2>Summarize a Topic</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="text">Enter text:</label>
+        <textarea name="text" rows="6" placeholder="Paste your topic, paragraph, or notes here..."></textarea>
+
+        <label for="audio">Or upload a .wav voice file:</label>
+        <input type="file" name="audio" accept=".wav">
+        <label for="document">Upload document (.txt, .pdf, .docx):</label>
+        <input type="file" name="document" accept=".txt,.pdf,.docx"><br><br>
+
+
+        <button type="submit">Summarize</button>
+    </form>
+    
+    
+
+    {% if summary %}
+    <hr>
+    <h4>📝 Summary:</h4>
+    <pre>{{ summary }}</pre>
+    {% endif %}
+
+    <!-- Download Summary -->
+    <a href="{% url 'download_summary' %}" class="btn" style="margin-top:10px;">Download Summary</a>
+    {% if error %}
+  <div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+{% if summary %}
+  <div class="alert alert-success">
+    <h5>✅ Summary</h5>
+    <p>{{ summary }}</p>
+  </div>
+{% endif %}
+    
+
+
+</div>
+
+<footer>
+    &copy; 2025 DreamRoute AI. All rights reserved.
+</footer>
+
+</body>
+</html>
